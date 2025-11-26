@@ -31,8 +31,7 @@ autocomplete({
         highlight_full_fields: 'name_place',
         highlight_start_tag: '<b>',
         highlight_end_tag: '</b>',
-        per_page: 10,
-        sort_by: 'location(10.8288176, 106.7226565):asc'
+        per_page: 10
       });
     
     function handleClick() {
