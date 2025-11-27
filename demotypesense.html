@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/demotypesense.css" />
+    <link rel="stylesheet" href="index.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic"
@@ -17,7 +17,7 @@
       src="https://cdn.jsdelivr.net/npm/typesense@1/dist/typesense.min.js"
     ></script>
     
-    <script defer src="js/demotypesense.js"></script>
+    <script defer src="index.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -42,7 +42,7 @@
         display: inline-block;
         width: 52px;
         height: 24px;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
       }
 
       /* Hide default HTML checkbox */
@@ -128,9 +128,13 @@
         <span class="slider round"></span>
       </label>
       <b>Địa chỉ hành chính mới</b>
+      </br>
+      <button onclick="getLocation()" class="button button2">Lấy địa chỉ</button>
+      <p id="demo"></p>
       <div id="autocomplete" style="margin-bottom: 20px;"></div>
       <div id="map"></div>
     </main>
     
   </body>
 </html>
+
