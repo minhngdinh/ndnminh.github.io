@@ -1,10 +1,10 @@
 const { autocomplete } = window['@algolia/autocomplete-js'];
 let minh;
 let typesenseClient = new Typesense.Client({
-  apiKey: 'O0CWHl5yAZtDJjtLIZJRUx/MRJmoe94aYBR4NHWEgW4=',
+  apiKey: '8hLCPSQTYcBuK29zY5q6Xhin7ONxHy99',
   nodes: [
     {
-      url: 'http://10.10.13.58:8108',
+      url: 'https://qtg5aekc2iosjh93p.a1.typesense.net',
     },
   ],
   connectionTimeoutSeconds: 2,
