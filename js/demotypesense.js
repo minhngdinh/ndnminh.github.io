@@ -4,7 +4,7 @@ let typesenseClient = new Typesense.Client({
   apiKey: 'O0CWHl5yAZtDJjtLIZJRUx/MRJmoe94aYBR4NHWEgW4=',
   nodes: [
     {
-      url: 'http://10.10.13.58:8108',
+      url: 'https://placing-exercise-valley-commissioner.trycloudflare.com',
     },
   ],
   connectionTimeoutSeconds: 2,
