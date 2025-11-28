@@ -4,7 +4,7 @@ let typesenseClient = new Typesense.Client({
   apiKey: 'O0CWHl5yAZtDJjtLIZJRUx/MRJmoe94aYBR4NHWEgW4=',
   nodes: [
     {
-      url: 'https://marcelene-jeopardous-unforcedly.ngrok-free.dev',
+      url: 'http://10.10.13.58:8108',
     },
   ],
   connectionTimeoutSeconds: 2,
