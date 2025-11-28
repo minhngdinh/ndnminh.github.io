@@ -78,7 +78,7 @@ autocomplete({
             }
             let distant = '';
             if(location_user != null) {
-              distant = '(' + getDistanceFromLatLonInKm(location_user.lat, location_user.lng, item.document.location[0], item.document.location[1]) + ' Km)'
+              distant = '(' + getDistanceFromLatLonInKm(location_user.lat, location_user.lng, item.document.location[0], item.document.location[1]) + ' Km) '
             }
             return html`<div onClick=${handleClick} dangerouslySetInnerHTML=${{ __html: html_fragment }}></div> <div onClick=${handleClick} dangerouslySetInnerHTML=${{ __html: distant + html_fragment2 }}></div>`;
           },
