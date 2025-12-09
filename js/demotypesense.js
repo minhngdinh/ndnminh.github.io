@@ -39,7 +39,7 @@ autocomplete({
     }
 
     const results = await typesenseClient
-    .collections('address_demo_hcm_2')
+    .collections('address_demo_hcm_3')
     .documents()
     .search(searchParams);
 
