@@ -1,10 +1,10 @@
 const { autocomplete } = window['@algolia/autocomplete-js'];
 let minh;
 let typesenseClient = new Typesense.Client({
-  apiKey: 'O0CWHl5yAZtDJjtLIZJRUx/MRJmoe94aYBR4NHWEgW4=',
+  apiKey: 'ZW5qb3lodXJ0YmVhdXRpZnVsbGlvbm1ham9yZGl2aXNpb25kb3duZm9sbG93ZGVzZXI=',
   nodes: [
     {
-      url: 'http://10.10.13.58:8108',
+      url: 'http://192.168.12.65:8108',
     },
   ],
   connectionTimeoutSeconds: 2,
@@ -39,7 +39,7 @@ autocomplete({
     }
 
     const results = await typesenseClient
-    .collections('address_demo_hcm_3')
+    .collections('place_ccmaps')
     .documents()
     .search(searchParams);
 
