@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tổng hợp việc làm Marketing tại TP. Hồ Chí Minh - Cập nhật mới nhất">
+    <meta name="theme-color" content="#0f766e">
+    <title>HCMC Marketing Jobs - Việc làm Marketing tại TP.HCM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💼</text></svg>">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">💼</span>
+                <span class="logo-text">HCMC Marketing Jobs</span>
+            </a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện">
+                <span class="theme-icon-light">☀️</span>
+                <span class="theme-icon-dark">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Tìm việc Marketing tại <span class="hero-highlight">TP. Hồ Chí Minh</span></h1>
+            <p class="hero-subtitle">Tổng hợp các vị trí Marketing mới nhất, được cập nhật từ nhiều nguồn uy tín</p>
+
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="search-input"
+                    placeholder="Tìm theo vị trí, công ty, kỹ năng..."
+                    aria-label="Tìm kiếm việc làm"
+                >
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-num" id="statTotal">0</span>
+                    <span class="stat-label">việc làm</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statCompanies">0</span>
+                    <span class="stat-label">công ty</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statDistricts">0</span>
+                    <span class="stat-label">quận / huyện</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container main-content">
+        <button class="filter-toggle" id="filterToggle" aria-expanded="false">
+            <span>⚙️ Bộ lọc</span>
+            <span class="filter-toggle-arrow">▾</span>
+        </button>
+
+        <aside class="filters" id="filters">
+            <div class="filter-group">
+                <label class="filter-label">Cấp bậc</label>
+                <div class="filter-chips" data-filter="level">
+                    <button class="chip active" data-value="all">Tất cả</button>
+                    <button class="chip" data-value="Intern">Intern</button>
+                    <button class="chip" data-value="Junior">Junior</button>
+                    <button class="chip" data-value="Middle">Middle</button>
+                    <button class="chip" data-value="Senior">Senior</button>
+                    <button class="chip" data-value="Manager">Manager</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Hình thức</label>
+                <div class="filter-chips" data-filter="type">
+                    <button class="chip active" data-value="all">Tất cả</button>
+                    <button class="chip" data-value="Full-time">Full-time</button>
+                    <button class="chip" data-value="Part-time">Part-time</button>
+                    <button class="chip" data-value="Remote">Remote</button>
+                    <button class="chip" data-value="Hybrid">Hybrid</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Khu vực</label>
+                <select id="districtSelect" class="select-input" aria-label="Chọn khu vực">
+                    <option value="all">Tất cả khu vực</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Sắp xếp</label>
+                <select id="sortSelect" class="select-input" aria-label="Sắp xếp">
+                    <option value="newest">Mới nhất</option>
+                    <option value="salaryDesc">Lương cao nhất</option>
+                    <option value="salaryAsc">Lương thấp nhất</option>
+                    <option value="company">Tên công ty</option>
+                </select>
+            </div>
+
+            <button class="btn-reset" id="btnReset">Đặt lại bộ lọc</button>
+        </aside>
+
+        <section class="jobs-section">
+            <div class="jobs-header">
+                <h2 class="jobs-title">Danh sách việc làm</h2>
+                <span class="jobs-count" id="jobsCount">0 kết quả</span>
+            </div>
+
+            <div class="jobs-grid" id="jobsGrid"></div>
+
+            <div class="load-sentinel" id="loadSentinel" hidden>
+                <div class="spinner"></div>
+                <span>Đang tải thêm...</span>
+            </div>
+
+            <div class="empty-state" id="emptyState" hidden>
+                <div class="empty-icon">📭</div>
+                <h3>Không tìm thấy việc làm phù hợp</h3>
+                <p>Thử thay đổi từ khoá hoặc bộ lọc khác nhé.</p>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="jobModal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" data-close aria-label="Đóng">✕</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 HCMC Marketing Jobs · Trang tổng hợp tin tuyển dụng</p>
+            <p class="footer-note">Dữ liệu mang tính chất tham khảo. Trang web tĩnh, deploy miễn phí trên GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
