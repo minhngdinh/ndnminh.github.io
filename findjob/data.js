@@ -17,8 +17,8 @@ const JOBS = [
         "Digital Marketing",
         "SEO Content Creation"
     ],
-    "posted": "15-04-2026",
-    "deadline": "25-04-2026",
+    "posted": "2026-04-15",
+    "deadline": "2026-04-25",
     "description": "Xây dựng nội dung đa nền tảng ngành dược (social media), Đóng góp ý tưởng, cùng team triển khai các chiến dịch “content marketing” theo mục tiêu tiếp thị tổng thể.\n•\tHiểu các nhóm điều trị, chức năng sản phẩm của công ty để xây dựng nội dung theo mô hình AIDA hướng tới chuyển đổi.\n•\tĐề xuất sáng tạo nội dung hữu ích, Lên kịch bản, chỉnh sửa, xây dựng video, hình ảnh, phù hợp với các nền tảng.\n•\tHỗ trợ sự kiện, thiết kế và chỉnh sửa các nội dung xoay quanh hành trình sự kiện như thư mời (hình ảnh, video), thiết kế bộ câu hỏi cho game theo sự kiện, gửi thông báo ZNS/ SMS/ khảo sát và phân loại để “remarketing” sau khi có dữ liệu.\n•\tDevelop multichannel content of the pharmaceutical industry (social media), contribute ideas, and collaborate with the team to execute content marketing campaigns aligned with overall marketing goals.\n•\tUnderstand treatment groups and product functions of the company to create content following the AIDA model aimed at conversion.\n•\tPropose creative and useful content, script writing, editing, creating videos, images, suitable for various platforms.\n•\tSupport events, design and edit content related to event journeys such as invitations (images, videos), design question sets for event-related games, send ZNS/SMS/surveys, and classify for remarketing after obtaining data.",
     "requirements": [
         "Tốt nghiệp cao đẳng - Đại học Dược.",
