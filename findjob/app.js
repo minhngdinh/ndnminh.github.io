@@ -34,6 +34,7 @@
 
     function formatSalary(s) {
         if (!s) return 'Thoả thuận';
+        if (typeof s === 'string') return s;
         return `${s.min}–${s.max} triệu`;
     }
 
@@ -65,8 +66,8 @@
     function sortJobs(jobs) {
         const arr = [...jobs];
         switch (state.sort) {
-            case 'salaryDesc': arr.sort((a, b) => b.salary.max - a.salary.max); break;
-            case 'salaryAsc':  arr.sort((a, b) => a.salary.min - b.salary.min); break;
+            case 'salaryDesc': arr.sort((a, b) => (typeof b.salary === 'object' ? b.salary.max : 0) - (typeof a.salary === 'object' ? a.salary.max : 0)); break;
+            case 'salaryAsc':  arr.sort((a, b) => (typeof a.salary === 'object' ? a.salary.min : 0) - (typeof b.salary === 'object' ? b.salary.min : 0)); break;
             case 'company':    arr.sort((a, b) => a.company.localeCompare(b.company, 'vi')); break;
             default:           arr.sort((a, b) => new Date(b.posted) - new Date(a.posted));
         }
@@ -193,7 +194,7 @@
 
             <div class="modal-section">
                 <h4>Mô tả công việc</h4>
-                <p style="font-size:14px">${job.description}</p>
+                <p style="font-size:14px; white-space: pre-wrap;">${job.description}</p>
             </div>
 
             <div class="modal-section">
