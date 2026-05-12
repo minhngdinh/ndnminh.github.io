@@ -7,7 +7,8 @@
         district: 'all',
         sort: 'newest',
         page: 1,
-        cached: []   // filtered+sorted list, computed once per filter change
+        cached: [],   // filtered+sorted list, computed once per filter change
+        currentJobIndex: -1
     };
     let observer = null;
 
@@ -158,11 +159,19 @@
         observer.observe(sentinel);
     }
 
-    function openModal(jobId) {
-        const job = JOBS.find(j => j.id === jobId);
-        if (!job) return;
+    function renderModalContent(job) {
+        const idx = state.currentJobIndex;
+        const total = state.cached.length;
+        const hasPrev = idx > 0;
+        const hasNext = idx < total - 1;
 
         $('#modalBody').innerHTML = `
+            <div class="modal-nav">
+                <button class="modal-nav-btn" id="modalPrev" ${hasPrev ? '' : 'disabled'} aria-label="Tin trước">‹</button>
+                <span class="modal-nav-counter">${idx + 1} / ${total}</span>
+                <button class="modal-nav-btn" id="modalNext" ${hasNext ? '' : 'disabled'} aria-label="Tin tiếp theo">›</button>
+            </div>
+
             <div class="modal-header">
                 <div class="modal-logo" style="background: ${colorFromName(job.company)}">
                     ${initials(job.company)}
@@ -228,13 +237,64 @@
             </a>
         `;
 
+        $('#modalPrev').addEventListener('click', () => navigateJob(-1));
+        $('#modalNext').addEventListener('click', () => navigateJob(1));
+    }
+
+    function openModal(jobId) {
+        const idx = state.cached.findIndex(j => j.id === jobId);
+        state.currentJobIndex = idx !== -1 ? idx : 0;
+        const job = state.cached[state.currentJobIndex];
+        if (!job) return;
+
+        renderModalContent(job);
         $('#jobModal').hidden = false;
+        $('#modalBody').scrollTop = 0;
         document.body.style.overflow = 'hidden';
+    }
+
+    function navigateJob(delta) {
+        const next = state.currentJobIndex + delta;
+        if (next < 0 || next >= state.cached.length) return;
+        state.currentJobIndex = next;
+        renderModalContent(state.cached[next]);
+        $('#modalBody').scrollTop = 0;
     }
 
     function closeModal() {
         $('#jobModal').hidden = true;
         document.body.style.overflow = '';
+    }
+
+    function setupModalSwipe() {
+        let startX = 0;
+        let startY = 0;
+        const modalContent = document.querySelector('.modal-content');
+
+        $('#jobModal').addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        $('#jobModal').addEventListener('touchend', (e) => {
+            if ($('#jobModal').hidden) return;
+            const dx = e.changedTouches[0].clientX - startX;
+            const dy = e.changedTouches[0].clientY - startY;
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+
+            // Swipe down to close (ưu tiên trước, threshold 80px)
+            if (dy > 80 && absDy > absDx) {
+                closeModal();
+                return;
+            }
+
+            // Swipe left/right to navigate
+            if (absDx > 50 && absDx > absDy) {
+                if (dx < 0) navigateJob(1);
+                else navigateJob(-1);
+            }
+        }, { passive: true });
     }
 
     function populateDistricts() {
@@ -328,7 +388,10 @@
 
         $$('[data-close]').forEach(el => el.addEventListener('click', closeModal));
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !$('#jobModal').hidden) closeModal();
+            if ($('#jobModal').hidden) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') navigateJob(-1);
+            if (e.key === 'ArrowRight') navigateJob(1);
         });
 
         // Theme toggle
@@ -352,6 +415,7 @@
         populateDistricts();
         bindEvents();
         setupInfiniteScroll();
+        setupModalSwipe();
         refresh();
     });
 })();
