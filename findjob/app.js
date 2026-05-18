@@ -249,7 +249,7 @@
 
         renderModalContent(job);
         $('#jobModal').hidden = false;
-        $('#modalBody').scrollTop = 0;
+        $('.modal-content').scrollTop = 0;
         document.body.style.overflow = 'hidden';
     }
 
@@ -258,7 +258,7 @@
         if (next < 0 || next >= state.cached.length) return;
         state.currentJobIndex = next;
         renderModalContent(state.cached[next]);
-        $('#modalBody').scrollTop = 0;
+        $('.modal-content').scrollTop = 0;
     }
 
     function closeModal() {
@@ -280,17 +280,9 @@
             if ($('#jobModal').hidden) return;
             const dx = e.changedTouches[0].clientX - startX;
             const dy = e.changedTouches[0].clientY - startY;
-            const absDx = Math.abs(dx);
-            const absDy = Math.abs(dy);
-
-            // Swipe down to close (ưu tiên trước, threshold 80px)
-            if (dy > 80 && absDy > absDx) {
-                closeModal();
-                return;
-            }
 
             // Swipe left/right to navigate
-            if (absDx > 50 && absDx > absDy) {
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
                 if (dx < 0) navigateJob(1);
                 else navigateJob(-1);
             }
